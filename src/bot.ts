@@ -23,7 +23,7 @@ bot.api.config.use(throttler);
 bot.use(session({
   getSessionKey,
   initial,
-  //storage: freeStorage<SessionData>(bot.token),
+  storage: freeStorage<SessionData>(bot.token),
 }));
 
 bot.on("inline_query", handlerGlobalQuery);
