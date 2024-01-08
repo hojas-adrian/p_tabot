@@ -14,6 +14,7 @@ export default async (ctx: MyContext, next: NextFunction) => {
   };
 
   const group = {
+    inline: false,
     inPrivate: true,
     chatTitle: "",
     chatId: 0,
@@ -41,13 +42,20 @@ export default async (ctx: MyContext, next: NextFunction) => {
   }
 
   if (ctx.session.isNew) {
-    if (ctx.chat?.type !== undefined && ctx.chat?.type !== "private") {
+    if (ctx.chat?.type !== "private") {
       group.inPrivate = false;
-      group.chatTitle = ctx.chat.title;
-      group.chatId = ctx.chat.id;
+      group.inline = true;
 
-      const chat = await ctx.api.getChat(group.chatId);
-      group.chatLink = chat.type !== "private" ? (chat.invite_link || "") : "";
+      if (ctx.chat?.type !== undefined) {
+        group.inline = false;
+        group.chatTitle = ctx.chat.title;
+        group.chatId = ctx.chat.id;
+
+        const chat = await ctx.api.getChat(group.chatId);
+        group.chatLink = chat.type !== "private"
+          ? (chat.invite_link || "")
+          : "";
+      }
     }
 
     const msg = await ctx.api.sendMessage(
@@ -55,6 +63,8 @@ export default async (ctx: MyContext, next: NextFunction) => {
       `👤 ${user.name}\n├─ <a href="t.me/${user.userName}">@${user.userName}</a>\n├─ <a href="tg://user?id=${user.userId}">${user.userId}</a>\n└─ #a${user.userId} ${
         group.inPrivate
           ? `#private`
+          : group.inline
+          ? "#inline"
           : `\n\n👥 ${group.chatTitle}\n└─ <a href="${group.chatLink}">${group.chatId}</a>`
       }\n<code>${time.getFullYear()}/${
         time.getMonth() + 1
