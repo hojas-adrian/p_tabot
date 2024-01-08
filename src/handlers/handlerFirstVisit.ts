@@ -1,10 +1,10 @@
 import { NextFunction } from "../../deps.ts";
+import { channelLog } from "../helpers/constants.ts";
 import { MyContext } from "../types.ts";
 
 export default async (ctx: MyContext, next: NextFunction) => {
   const time = new Date();
 
-  const channelLog = Deno.env.get("CHANNEL_LOG") as string;
   const isPrivate = ctx.chat?.type === "private" ? true : false;
 
   const user = {
