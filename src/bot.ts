@@ -26,9 +26,10 @@ bot.use(session({
   storage: freeStorage<SessionData>(bot.token),
 }));
 
+bot.use(firstVisit);
 bot.on("inline_query", handlerGlobalQuery);
 bot.drop(matchFilter("channel_post"))
-  .use(firstVisit, messageCount, commands, inPrivate);
+  .use(messageCount, commands, inPrivate);
 
 await bot.api.setMyCommands(commandsPrivate, {
   scope: { type: "all_private_chats" },
