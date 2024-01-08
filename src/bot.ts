@@ -26,8 +26,10 @@ bot.use(session({
   storage: freeStorage<SessionData>(bot.token),
 }));
 
-bot.use(firstVisit);
-bot.on("inline_query", handlerGlobalQuery);
+bot.drop(matchFilter("channel_post"))
+  .use(firstVisit)
+  .on("inline_query", handlerGlobalQuery);
+
 bot.drop(matchFilter("channel_post"))
   .use(messageCount, commands, inPrivate);
 
