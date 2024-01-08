@@ -14,11 +14,8 @@ import handlerAuthor from "../handlers/handlerAuthor.ts";
 
 const composer = new Composer<MyContext>();
 
-const setFree = Deno.env.get("COMMNAD_SET_FREE") as string;
-const setPremium = Deno.env.get("COMMNAD_SET_PREMIUM") as string;
-
-composer.command(setFree, handlerSetFreeUser);
-composer.command(setPremium, handlerSetPremiumUser);
+composer.command("setFree", handlerSetFreeUser);
+composer.command("setPremium", handlerSetPremiumUser);
 
 composer.command("p_free", handlerFree);
 composer.command("p_upgrade", handlerUpgrade);
