@@ -41,7 +41,7 @@ export default async (ctx: MyContext) => {
   }
 
   await ctx.reply(
-    `🐸 <b>hola! ${ctx.from?.first_name}</b>, este bot personaliza los stickers con el texto que quieras. Estos son los comandos disponibles:\n\n<blockquote>\n/send Devuelve el sticker con el texto personalizado\n/settings Configura el estilo del texto ⚠️\n/status Muestra tu status en el bot\n/help Muestra la ayuda</blockquote>\n\nPara usarlo en modo inline solo escribe el nombre del bot seguido del texto con que quieras que se env'ie.`,
+    `🐸 <b>hola! ${ctx.from?.first_name}</b>, este bot personaliza los stickers con el texto que quieras. Estos son los comandos disponibles:\n\n<blockquote>\n/send Devuelve el sticker con el texto personalizado\n/settings Configura el estilo del texto ⚠️\n/status Muestra tu status en el bot\n/help Muestra la ayuda</blockquote>\n\nPara usarlo en modo inline solo escribe el nombre del bot seguido del texto con que quieras que se envíe.`,
     {
       parse_mode: "HTML",
       reply_markup: search,
