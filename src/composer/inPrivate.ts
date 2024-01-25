@@ -1,4 +1,5 @@
 import { Composer } from "../../deps.ts";
+import { sticker } from "../helpers/constants.ts";
 import { sendSticker } from "../helpers/utils.ts";
 import { MyContext } from "../types.ts";
 
@@ -20,7 +21,7 @@ composer
 composer
   .chatType("private")
   .on("message:text", async (ctx: MyContext) => {
-    await sendSticker(ctx, ctx.message?.text as string);
+    await sendSticker(ctx, ctx.message?.text as string, sticker[0]);
   });
 
 export default composer;
