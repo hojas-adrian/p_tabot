@@ -11,9 +11,11 @@ import handlerUpgrade from "../handlers/handlerChangeUpgrade.ts";
 import handlerStatus from "../handlers/handlerStatus.ts";
 import handlerHelp from "../handlers/handlerHelp.ts";
 import handlerAuthor from "../handlers/handlerAuthor.ts";
+import handlerVersion from "../handlers/handlerVersion.ts";
 
 const composer = new Composer<MyContext>();
 
+composer.command("version", handlerVersion);
 composer.command("setFree", handlerSetFreeUser);
 composer.command("setPremium", handlerSetPremiumUser);
 
